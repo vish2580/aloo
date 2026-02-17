@@ -1,0 +1,35 @@
+/* ===== UID Display Styles ===== */
+
+/* User UID text in account profile */
+.user-uid {
+    font-size: 13px;
+    color: rgba(148, 163, 184, 0.8);
+    margin: 4px 0 8px 0;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Country selector repositioned to top-right */
+.account-profile-card {
+    position: relative;
+}
+
+.country-selector-topright {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+/* Adjust profile details to avoid overlap with country selector */
+.account-profile-card .profile-details {
+    padding-right: 80px;
+    /* Make room for country selector */
+}
+
+/* Admin panel UID column styling */
+.admin-table .uid-column {
+    font-weight: 600;
+    color: #6366f1;
+    font-size: 14px;
+}

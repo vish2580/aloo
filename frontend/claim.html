@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧧 Claim Red Envelope - LuxWin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .claim-container {
+            background: linear-gradient(145deg, #2d1f1f 0%, #3d1f1f 50%, #4d2020 100%);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.2), 0 0 100px rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .envelope-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .claim-title {
+            color: #ffd700;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .claim-subtitle {
+            color: #ffb3b3;
+            font-size: 16px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .envelope-code {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .code-value {
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .claim-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #d63031 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(238, 90, 36, 0.4);
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .claim-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(238, 90, 36, 0.6);
+        }
+
+        .claim-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .claim-btn.loading {
+            pointer-events: none;
+        }
+
+        .claim-btn.loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 16px;
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-box.success {
+            display: block;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+
+        .result-box.error {
+            display: block;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .result-box.success .result-title {
+            color: #4ade80;
+        }
+
+        .result-box.error .result-title {
+            color: #f87171;
+        }
+
+        .result-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .result-message {
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .login-prompt {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-prompt.show {
+            display: block;
+        }
+
+        .login-prompt p {
+            color: #ffb3b3;
+            margin-bottom: 15px;
+        }
+
+        .login-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 25px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .login-link:hover {
+            background: rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            color: #666;
+            font-size: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="claim-container">
+        <div class="envelope-icon">🧧</div>
+        <h1 class="claim-title">Red Envelope</h1>
+        <p class="claim-subtitle">You've received a special reward!</p>
+
+        <div class="envelope-code">
+            <div class="code-label">Envelope Code</div>
+            <div class="code-value" id="envelopeCode">Loading...</div>
+        </div>
+
+        <button class="claim-btn" id="claimBtn" onclick="claimEnvelope()">
+            🎁 Claim Reward
+        </button>
+
+        <div class="login-prompt" id="loginPrompt">
+            <p>Please login to claim your red envelope reward!</p>
+            <a href="index.html" class="login-link">Login / Register</a>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div class="result-icon" id="resultIcon"></div>
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-amount" id="resultAmount"></div>
+            <div class="result-message" id="resultMessage"></div>
+        </div>
+
+        <p class="footer-note">LuxWin - Color Prediction Game</p>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        let envelopeCode = null;
+
+        // Get code from URL
+        function getCodeFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('code');
+        }
+
+        // Check if user is logged in
+        function isLoggedIn() {
+            const token = localStorage.getItem('token');
+            return !!token;
+        }
+
+        // Get auth token
+        function getToken() {
+            return localStorage.getItem('token');
+        }
+
+        // Initialize page
+        function init() {
+            envelopeCode = getCodeFromURL();
+
+            if (!envelopeCode) {
+                document.getElementById('envelopeCode').textContent = 'Invalid Link';
+                document.getElementById('claimBtn').disabled = true;
+                document.getElementById('claimBtn').textContent = 'No Code Found';
+                return;
+            }
+
+            document.getElementById('envelopeCode').textContent = envelopeCode;
+
+            if (!isLoggedIn()) {
+                document.getElementById('loginPrompt').classList.add('show');
+                document.getElementById('claimBtn').disabled = true;
+                document.getElementById('claimBtn').textContent = 'Login Required';
+            }
+        }
+
+        // Claim the envelope
+        async function claimEnvelope() {
+            if (!envelopeCode) {
+                showResult('error', 'Invalid envelope code');
+                return;
+            }
+
+            if (!isLoggedIn()) {
+                document.getElementById('loginPrompt').classList.add('show');
+                return;
+            }
+
+            const btn = document.getElementById('claimBtn');
+            btn.classList.add('loading');
+            btn.textContent = 'Claiming';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/red-envelope/claim`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${getToken()}`
+                    },
+                    body: JSON.stringify({ code: envelopeCode })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showResult('success', data);
+                    createConfetti();
+                    btn.textContent = '✓ Claimed!';
+                    btn.style.background = '#22c55e';
+                } else {
+                    showResult('error', data.message || 'Failed to claim');
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                    btn.textContent = '🎁 Claim Reward';
+                }
+            } catch (error) {
+                console.error('Claim error:', error);
+                showResult('error', 'Network error. Please try again.');
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                btn.textContent = '🎁 Claim Reward';
+            }
+        }
+
+        // Show result
+        function showResult(type, data) {
+            const box = document.getElementById('resultBox');
+            const icon = document.getElementById('resultIcon');
+            const title = document.getElementById('resultTitle');
+            const amount = document.getElementById('resultAmount');
+            const message = document.getElementById('resultMessage');
+
+            box.className = 'result-box ' + type;
+
+            if (type === 'success') {
+                icon.textContent = '🎉';
+                title.textContent = 'Congratulations!';
+                amount.textContent = `+$${parseFloat(data.data.amount).toFixed(2)}`;
+                message.textContent = `Added to your balance. New balance: $${parseFloat(data.data.new_balance).toFixed(2)}`;
+            } else {
+                icon.textContent = '😔';
+                title.textContent = 'Oops!';
+                amount.textContent = '';
+                message.textContent = typeof data === 'string' ? data : 'Something went wrong';
+            }
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#ffd700', '#ff6b6b', '#4ade80', '#60a5fa', '#f472b6'];
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    document.body.appendChild(confetti);
+
+                    const animation = confetti.animate([
+                        { top: '-10px', opacity: 1 },
+                        { top: '100vh', opacity: 0 }
+                    ], {
+                        duration: 3000 + Math.random() * 2000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+
+                    animation.onfinish = () => confetti.remove();
+                }, i * 50);
+            }
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,2413 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0a0612" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>LuxWin - Color Prediction Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- ========== LOGIN SCREEN ========== -->
+        <div id="login-screen" class="screen active">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <img src="assets/images/logo.png.jpg" class="app-logo" alt="LuxWin Logo">
+                    <p class="tagline">Predict & Win</p>
+
+                    <form class="auth-form">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Enter your email" class="form-input" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Enter your password" class="form-input" />
+                        </div>
+
+                        <div class="forgot-password-link" onclick="navigateTo('forgot-password-screen')">
+                            Forgot Password?
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Login
+                        </button>
+
+                        <p class="switch-auth">
+                            Don't have an account?
+                            <span class="link" onclick="navigateTo('register-screen')">Register</span>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== REGISTER SCREEN ========== -->
+        <div id="register-screen" class="screen">
+            <div class="header signup-header">
+                <span class="back-btn" onclick="navigateTo('login-screen')">←</span>
+                <h2>Sign Up</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="signup-container">
+                <img src="assets/images/logo.png.jpg" class="app-logo" alt="LuxWin Logo">
+                <p class="tagline">Predict & Win</p>
+
+                <form class="signup-form">
+                    <div class="signup-input-group">
+                        <div class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="M22 6l-10 7L2 6"></path>
+                            </svg>
+                        </div>
+                        <input type="email" placeholder="Email" class="signup-input" />
+                    </div>
+
+                    <div class="signup-input-group">
+                        <div class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                            </svg>
+                        </div>
+                        <input type="password" placeholder="Password" class="signup-input" />
+                        <button type="button" class="password-toggle">
+                            +
+                        </button>
+                    </div>
+
+                    <div class="signup-input-group">
+                        <div class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="password" placeholder="Withdrawal Password" class="signup-input" />
+                        <button type="button" class="password-toggle">
+                            +
+                        </button>
+                    </div>
+
+                    <div class="signup-input-group">
+                        <div class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z">
+                                </path>
+                            </svg>
+                        </div>
+                        <input type="tel" placeholder="WhatsApp / Contact" class="signup-input" />
+                    </div>
+
+                    <div class="signup-checkbox-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" class="form-checkbox" />
+                            <span class="checkmark">✓</span>
+                            <span class="checkbox-text">I agree to the
+                                <a href="#" class="privacy-link"
+                                    onclick="navigateTo('privacy-policy-screen'); event.preventDefault();">Privacy
+                                    Policy</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-signup">
+                        Sign Up
+                    </button>
+
+                    <p class="login-link">
+                        I have an account?
+                        <span class="link" onclick="navigateTo('login-screen')">Login</span>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- ========== PRIVACY POLICY SCREEN ========== -->
+        <div id="privacy-policy-screen" class="screen">
+            <div class="header">
+                <span class="back-btn" onclick="navigateTo('register-screen')">←</span>
+                <h2>Privacy Policy</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="content privacy-policy-content">
+                <div class="privacy-policy-card">
+                    <h3>PRIVACY POLICY</h3>
+                    <p class="policy-updated">Last Updated: February 2026</p>
+
+                    <p
+                        style="font-size: 13px; line-height: 1.6; color: rgba(203, 213, 225, 0.85); margin-bottom: 12px;">
+                        Welcome to our platform. Your privacy is extremely important to us. This Privacy Policy explains
+                        how we collect, use, protect, and handle your information when you use our website and services.
+                    </p>
+
+                    <p
+                        style="font-size: 13px; line-height: 1.6; color: rgba(203, 213, 225, 0.85); margin-bottom: 16px;">
+                        By registering or using our services, you agree to this Privacy Policy.
+                    </p>
+
+                    <div class="policy-section">
+                        <h4>1. Information We Collect</h4>
+                        <p><strong>a) Personal Information:</strong> Email address, Username, User ID, Transaction
+                            details, Wallet address (for deposits and withdrawals)</p>
+                        <p><strong>b) Technical Information:</strong> IP address, Device type, Browser type, Operating
+                            system, Login timestamps</p>
+                        <p><strong>c) Transaction Information:</strong> Deposit records, Withdrawal requests, Game
+                            activity history, Bet results</p>
+                        <p style="font-size: 12px; color: rgba(34, 197, 94, 0.9); margin-top: 8px;">We do NOT collect
+                            unnecessary identity documents unless required by law.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>2. How We Use Your Information</h4>
+                        <p>Your information is used to: Create and manage your account, Process deposits and
+                            withdrawals, Maintain transaction records, Improve platform performance, Prevent fraud and
+                            abuse, Provide customer support, Comply with legal obligations.</p>
+                        <p style="font-size: 12px; color: rgba(34, 197, 94, 0.9); margin-top: 8px;">We do NOT sell your
+                            personal data to third parties.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>3. Data Security</h4>
+                        <p>We implement security measures including: Encrypted data transmission, Secure server storage,
+                            Access control restrictions, Regular monitoring.</p>
+                        <p style="font-size: 12px; color: rgba(34, 197, 94, 0.9); margin-top: 8px;">Users are
+                            responsible for keeping their login credentials secure.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>4. Cookies & Tracking</h4>
+                        <p>We may use cookies to: Maintain login sessions, Improve user experience, Analyze traffic,
+                            Enhance performance. Disabling cookies may affect certain features.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>5. Third-Party Services</h4>
+                        <p>We may use third-party services for: Payment processing, Blockchain verification, Analytics,
+                            Support tools. We are not responsible for external platforms' privacy practices.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>6. Account Responsibility</h4>
+                        <p>Users are responsible for: Keeping login credentials secure, Entering correct wallet
+                            addresses, Providing accurate information.</p>
+                        <p style="font-size: 12px; color: rgba(34, 197, 94, 0.9); margin-top: 8px;">We are not liable
+                            for losses caused by user negligence.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>7. Data Retention</h4>
+                        <p>We retain necessary data for: Operational purposes, Legal compliance, Fraud prevention. Some
+                            data may remain stored even after account closure if legally required.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>8. Age Restriction</h4>
+                        <p style="font-size: 12px; color: rgba(34, 197, 94, 0.9);">This platform is strictly for users
+                            18 years or older. By registering, you confirm that you meet the legal age requirement.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>9. Policy Updates</h4>
+                        <p>We reserve the right to update this Privacy Policy at any time. Continued use of the platform
+                            means you accept the updated policy.</p>
+                    </div>
+
+                    <div class="policy-section">
+                        <h4>10. Contact</h4>
+                        <p>For any privacy-related concerns, please contact support through the Support section of the
+                            platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== FORGOT PASSWORD SCREEN ========== -->
+        <div id="forgot-password-screen" class="screen">
+            <div class="header">
+                <span class="back-btn" onclick="navigateTo('login-screen')">←</span>
+                <h2>Reset Password</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="auth-container">
+                <div class="auth-card">
+                    <img src="assets/images/logo.png.jpg" class="app-logo" alt="LuxWin Logo">
+                    <p class="tagline">Predict & Win</p>
+
+                    <p class="forgot-password-subtitle">Enter your registered email to receive reset link</p>
+
+                    <form class="auth-form forgot-password-form" onsubmit="handleForgotPassword(event); return false;">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Enter your email" class="form-input" />
+                        </div>
+
+                        <!-- Validation Messages (Placeholders) -->
+                        <div class="validation-message error-message" style="display: none;">
+                            Please enter a valid email address
+                        </div>
+                        <div class="validation-message success-message" style="display: none;">
+                            If this email exists, a reset link has been sent.
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Send Reset Link
+                        </button>
+
+                        <p class="switch-auth">
+                            <span class="link" onclick="navigateTo('login-screen')">Back to Login</span>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== HOME / GAME SCREEN ========== -->
+        <div id="home-screen" class="screen">
+            <div class="header home-header">
+                <div class="logo-container">
+                    <img src="assets/images/logo.png.jpg" class="app-logo small" alt="LuxWin Logo">
+                </div>
+                <div class="header-spacer"></div>
+                <div class="help-icon" onclick="navigateTo('support-screen')">
+                    ?
+                </div>
+            </div>
+
+            <div class="content home-content">
+                <!-- Balance Card -->
+                <div class="balance-card">
+                    <div class="balance-header-row">
+                        <div class="balance-label-wrapper">
+                            <p class="balance-label">Total Balance</p>
+                            <div class="balance-refresh-icon" id="balanceRefreshIcon" onclick="refreshGameState()"
+                                title="Refresh Game State">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 4 23 10 17 10"></polyline>
+                                    <polyline points="1 20 1 14 7 14"></polyline>
+                                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="info-tooltip-wrapper">
+                            <div class="info-icon" onclick="
+                                        toggleInfoTooltip(
+                                            event,
+                                            'home-balance-tooltip',
+                                        )
+                                    ">
+                                ?
+                            </div>
+                            <div class="info-tooltip" id="home-balance-tooltip">
+                                <p>
+                                    This is your available balance for
+                                    betting.
+                                </p>
+                                <p>Bet amount is deducted instantly.</p>
+                                <p>
+                                    Winning amount is added after the round
+                                    ends.
+                                </p>
+                                <p>
+                                    Bets are locked in the last 30 seconds.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="balance-value">$0.00</h2>
+                </div>
+
+                <!-- Game Info Row -->
+                <div class="game-info-row">
+                    <div class="round-display">
+                        <span class="round-icon">🏆</span>
+                        <span class="period-label">Period</span>
+                        <span class="round-id">---</span>
+                    </div>
+                    <div class="timer-display">
+                        <span class="countdown-label">Countdown</span>
+                        <span class="timer-text">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Color Bet Buttons -->
+                <div class="betting-section">
+                    <div class="color-options">
+                        <button class="color-btn red" data-color="red">
+                            RED
+                        </button>
+                        <button class="color-btn green" data-color="green">
+                            GREEN
+                        </button>
+                        <button class="color-btn purple" data-color="purple">
+                            PURPLE
+                        </button>
+                    </div>
+
+                    <!-- Number Bet Grid (0-9) -->
+                    <div class="number-options">
+                        <button class="number-btn num-0" data-num="0">
+                            0
+                        </button>
+                        <button class="number-btn num-1" data-num="1">
+                            1
+                        </button>
+                        <button class="number-btn num-2" data-num="2">
+                            2
+                        </button>
+                        <button class="number-btn num-3" data-num="3">
+                            3
+                        </button>
+                        <button class="number-btn num-4" data-num="4">
+                            4
+                        </button>
+                        <button class="number-btn num-5" data-num="5">
+                            5
+                        </button>
+                        <button class="number-btn num-6" data-num="6">
+                            6
+                        </button>
+                        <button class="number-btn num-7" data-num="7">
+                            7
+                        </button>
+                        <button class="number-btn num-8" data-num="8">
+                            8
+                        </button>
+                        <button class="number-btn num-9" data-num="9">
+                            9
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mini Result History Card -->
+                <div class="mini-result-history-section">
+                    <h3 class="section-title">Record 🏆</h3>
+                    <div class="mini-result-table">
+                        <div class="mini-result-header">
+                            <span>Period</span>
+                            <span>Price</span>
+                            <span>Number</span>
+                            <span>Color</span>
+                        </div>
+                        <div class="mini-result-body" id="miniResultBody">
+                            <!-- Dynamically populated by JS -->
+                            <div class="mini-result-loading">
+                                Loading...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mini-result-pagination">
+                        <span class="pagination-info" id="miniResultPaginationInfo">1-10 of 0</span>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="miniResultPrevBtn" onclick="miniResultPrevPage()"
+                                disabled>
+                                &lt;
+                            </button>
+                            <button class="pagination-btn" id="miniResultNextBtn" onclick="miniResultNextPage()">
+                                &gt;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bet History Table -->
+                <div class="my-bets-section">
+                    <h3 class="section-title">My Bet History</h3>
+                    <div class="bet-history-table">
+                        <div class="bet-table-header">
+                            <span>Round ID</span>
+                            <span>Selected</span>
+                            <span>Result</span>
+                            <span>Amount</span>
+                        </div>
+                        <div class="bet-history-preview">
+                            <!-- Dynamically populated from database by JS -->
+                            <p style="
+                                        text-align: center;
+                                        color: rgba(148, 163, 184, 0.5);
+                                        padding: 20px;
+                                        font-size: 13px;
+                                    ">
+                                Login to view your bets
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bet-history-pagination">
+                        <span class="pagination-info" id="betHistoryPaginationInfo">1-5 of 0</span>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" id="betHistoryPrevBtn" onclick="betHistoryPrevPage()"
+                                disabled>
+                                &lt;
+                            </button>
+                            <button class="pagination-btn" id="betHistoryNextBtn" onclick="betHistoryNextPage()">
+                                &gt;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== FUN SCREEN ========== -->
+        <div id="fun-screen" class="screen">
+            <div class="header fun-header">
+                <span class="back-btn" onclick="navigateTo('home-screen')">←</span>
+                <h2>Fun</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="content fun-content">
+                <!-- Section 1 & 2: Top Banner Cards Row -->
+                <div class="fun-banners-grid">
+                    <!-- Banner 1: Invite & Earn Commission -->
+                    <div class="fun-banner invite-banner" onclick="navigateTo('promotions-screen')">
+                        <div class="banner-content">
+                            <h3>Invite & Earn</h3>
+                            <h2>Commission</h2>
+                        </div>
+                        <div class="banner-image-area">
+                            <div class="image-placeholder">
+                                <span class="plus-icon">+</span>
+                            </div>
+                        </div>
+                        <!-- Red Envelope Sub-card -->
+                        <div class="banner-sub-card" onclick="
+                                    handleFunCardClick(
+                                        'red-envelope-screen',
+                                        'claim Red Envelope',
+                                    );
+                                    event.stopPropagation();
+                                ">
+                            <div class="sub-card-image">
+                                <span class="plus-icon small">+</span>
+                            </div>
+                            <span class="sub-card-text">Red Envelope<br />Event</span>
+                        </div>
+                    </div>
+
+                    <!-- Banner 2: VIP Rewards -->
+                    <div class="fun-banner vip-banner" onclick="
+                                handleFunCardClick(
+                                    'vip-screen',
+                                    'access VIP Rewards',
+                                )
+                            ">
+                        <div class="vip-image-area">
+                            <div class="image-placeholder vip">
+                                <span class="plus-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="vip-content">
+                            <h2>VIP</h2>
+                            <p>Rewards</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Get Started - 3 Action Cards (Full Image) -->
+                <div class="fun-section">
+                    <h3 class="fun-section-title">
+                        Get Started & earn rewards
+                    </h3>
+                    <div class="fun-action-cards-grid">
+                        <!-- Card 1: Invite Friends -->
+                        <div class="fun-image-card" onclick="
+                                    handleFunCardClick(
+                                        'promotions-screen',
+                                        'invite friends',
+                                    )
+                                ">
+                            <img src="assets/images/promotion.png.jpg" class="fun-card-image" alt="Invite Friends">
+                            <div class="fun-card-text">Invite Friends</div>
+                        </div>
+
+                        <!-- Card 2: Play Games -->
+                        <div class="fun-image-card" onclick="navigateTo('home-screen')">
+                            <img src="assets/images/game.png.jpg" class="fun-card-image" alt="Play Games">
+                            <div class="fun-card-text">Play Games</div>
+                        </div>
+
+                        <!-- Card 3: Recharge -->
+                        <div class="fun-image-card" onclick="
+                                    handleFunCardClick(
+                                        'add-funds-screen',
+                                        'add funds',
+                                    )
+                                ">
+                            <img src="assets/images/recharge.png.jpg" class="fun-card-image" alt="Recharge">
+                            <div class="fun-card-text">Recharge</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Active Offers -->
+                <div class="fun-section">
+                    <h3 class="fun-section-title">Active Offers</h3>
+                    <div class="fun-offer-card" onclick="
+                                handleFunCardClick(
+                                    'red-envelope-screen',
+                                    'claim Red Envelope',
+                                )
+                            ">
+                        <div class="offer-image-box">
+                            <img src="assets/images/redenevlope.png.png" alt="Red Envelope" class="offer-image">
+                        </div>
+                        <div class="offer-text">
+                            <h4>Red Envelope Event</h4>
+                            <p>Up to $1000</p>
+                        </div>
+                        <span class="offer-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- Section 5: Top Earners (Realtime Feed) -->
+                <div class="fun-section">
+                    <h3 class="fun-section-title">Top Earners</h3>
+                    <div class="fun-earners-list" id="topEarnersFeed">
+                        <!-- Dynamically populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== RED ENVELOPE SCREEN ========== -->
+        <div id="red-envelope-screen" class="screen">
+            <div class="header red-envelope-header">
+                <span class="back-btn" onclick="navigateTo('fun-screen')">←</span>
+                <h2>Red Envelope</h2>
+            </div>
+
+            <div class="content red-envelope-content">
+                <!-- No Active Rewards Message -->
+                <div
+                    style="display: flex; align-items: center; justify-content: center; min-height: 60vh; text-align: center; padding: 20px;">
+                    <p style="color: rgba(148, 163, 184, 0.7); font-size: 15px; font-weight: 500;">
+                        No active rewards available
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== VIP SCREEN ========== -->
+        <div id="vip-screen" class="screen">
+            <div class="header">
+                <span class="back-btn" onclick="navigateTo('fun-screen')">←</span>
+                <h2>VIP Rewards</h2>
+            </div>
+
+            <div class="content">
+                <div class="vip-hero">
+                    <div class="vip-crown">👑</div>
+                    <h2>VIP Member</h2>
+                    <p class="vip-level">Level 1</p>
+                </div>
+
+                <div class="vip-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%"></div>
+                    </div>
+                    <p class="progress-text">$350 / $1000 to next level</p>
+                </div>
+
+                <div class="vip-benefits">
+                    <h3>Your Benefits</h3>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎁</span>
+                        <span>Daily bonus: $5</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💸</span>
+                        <span>Cashback: 1%</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⚡</span>
+                        <span>Fast withdrawals</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== OFFERS SCREEN ========== -->
+        <div id="offers-screen" class="screen">
+            <div class="header">
+                <span class="back-btn" onclick="navigateTo('fun-screen')">←</span>
+                <h2>Active Offers</h2>
+            </div>
+
+            <div class="content">
+                <div class="offer-card">
+                    <div class="offer-badge">50% BONUS</div>
+                    <h3>First Deposit Bonus</h3>
+                    <p>Get 50% extra on your first deposit!</p>
+                    <p class="offer-expires">Expires: Jan 10, 2026</p>
+                    <button class="btn btn-primary" onclick="navigateTo('add-funds-screen')">
+                        Deposit Now
+                    </button>
+                </div>
+
+                <div class="offer-card">
+                    <div class="offer-badge hot">HOT</div>
+                    <h3>Weekend Cashback</h3>
+                    <p>Get 10% cashback on all bets this weekend!</p>
+                    <p class="offer-expires">Sat-Sun only</p>
+                    <button class="btn btn-secondary" onclick="navigateTo('home-screen')">
+                        Play Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== LEADERBOARD SCREEN ========== -->
+        <div id="leaderboard-screen" class="screen">
+            <div class="header">
+                <span class="back-btn" onclick="navigateTo('fun-screen')">←</span>
+                <h2>Top Earners</h2>
+            </div>
+
+            <div class="content">
+                <!-- Leaderboard loaded dynamically from database -->
+                <div class="leaderboard-podium" id="leaderboardPodium">
+                    <div class="podium-item second">
+                        <div class="podium-avatar">🥈</div>
+                        <p class="podium-name">---</p>
+                        <p class="podium-amount">$0</p>
+                    </div>
+                    <div class="podium-item first">
+                        <div class="podium-avatar">🥇</div>
+                        <p class="podium-name">---</p>
+                        <p class="podium-amount">$0</p>
+                    </div>
+                    <div class="podium-item third">
+                        <div class="podium-avatar">🥉</div>
+                        <p class="podium-name">---</p>
+                        <p class="podium-amount">$0</p>
+                    </div>
+                </div>
+
+                <div class="leaderboard-list" id="leaderboardList">
+                    <p style="
+                                text-align: center;
+                                color: rgba(148, 163, 184, 0.5);
+                                padding: 20px;
+                                font-size: 13px;
+                            ">
+                        Loading leaderboard data...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ACCOUNT / DASHBOARD SCREEN ========== -->
+        <div id="account-screen" class="screen">
+            <div class="header account-header">
+                <span class="back-btn" onclick="navigateTo('home-screen')">←</span>
+                <h2>Account</h2>
+                <div class="header-spacer"></div>
+                <div class="help-icon" onclick="navigateTo('support-screen')">
+                    ?
+                </div>
+            </div>
+
+            <div class="content account-content">
+                <!-- Profile Card -->
+                <div class="account-profile-card">
+                    <div class="profile-avatar" id="userAvatar">
+                        <!-- Avatar generated dynamically by JS -->
+                    </div>
+                    <div class="profile-details">
+                        <p class="email" id="userEmail">
+                            user*****@mail.com
+                        </p>
+                        <p class="user-uid" id="userUid">UID: 0</p>
+                        <p class="profile-balance">
+                            <span class="balance-amount">$0.00</span>
+                            <span class="balance-currency">USD</span>
+                            <span class="vip-badge" id="vipBadge" onclick="openVIPModal()">VIP 0</span>
+                        </p>
+                    </div>
+                    <!-- Country Selector - Top Right Corner -->
+                    <div class="country-selector-wrapper country-selector-topright">
+                        <div class="country-selector" id="countrySelector" onclick="toggleCountryDropdown()">
+                            <span class="country-flag" id="countryFlag">🇺🇸</span>
+                            <span class="country-code" id="countryCode">USA</span>
+                            <span class="country-arrow">▼</span>
+                        </div>
+                        <div class="country-dropdown" id="countryDropdown">
+                            <div class="country-option" onclick="selectCountry('USA')">
+                                🇺🇸 USA
+                            </div>
+                            <div class="country-option" onclick="selectCountry('IND')">
+                                🇮🇳 IND
+                            </div>
+                            <div class="country-option" onclick="selectCountry('GBR')">
+                                🇬🇧 GBR
+                            </div>
+                            <div class="country-option" onclick="selectCountry('CAN')">
+                                🇨🇦 CAN
+                            </div>
+                            <div class="country-option" onclick="selectCountry('AUS')">
+                                🇦🇺 AUS
+                            </div>
+                            <div class="country-option" onclick="selectCountry('THA')">
+                                🇹🇭 THA
+                            </div>
+                            <div class="country-option" onclick="selectCountry('BRA')">
+                                🇧🇷 BRA
+                            </div>
+                            <div class="country-option" onclick="selectCountry('DEU')">
+                                🇩🇪 DEU
+                            </div>
+                            <div class="country-option" onclick="selectCountry('FRA')">
+                                🇫🇷 FRA
+                            </div>
+                            <div class="country-option" onclick="selectCountry('JPN')">
+                                🇯🇵 JPN
+                            </div>
+                            <div class="country-option" onclick="selectCountry('KOR')">
+                                🇰🇷 KOR
+                            </div>
+                            <div class="country-option" onclick="selectCountry('SGP')">
+                                🇸🇬 SGP
+                            </div>
+                            <div class="country-option" onclick="selectCountry('PHL')">
+                                🇵🇭 PHL
+                            </div>
+                            <div class="country-option" onclick="selectCountry('IDN')">
+                                🇮🇩 IDN
+                            </div>
+                            <div class="country-option" onclick="selectCountry('MYS')">
+                                🇲🇾 MYS
+                            </div>
+                            <div class="country-option" onclick="selectCountry('VNM')">
+                                🇻🇳 VNM
+                            </div>
+                            <div class="country-option" onclick="selectCountry('NGA')">
+                                🇳🇬 NGA
+                            </div>
+                            <div class="country-option" onclick="selectCountry('ZAF')">
+                                🇿🇦 ZAF
+                            </div>
+                            <div class="country-option" onclick="selectCountry('ARE')">
+                                🇦🇪 ARE
+                            </div>
+                            <div class="country-option" onclick="selectCountry('MEX')">
+                                🇲🇽 MEX
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Options Grid - 10 cards: Wallet, Withdrawal, Transactions, Bet History, Promotion, Red Envelope, Security, Support, Download, Logout -->
+                <div class="account-options-grid">
+                    <!-- Row 1: Wallet, Withdrawal -->
+                    <!-- 1. Wallet -->
+                    <div class="account-option-card" onclick="navigateTo('wallet-screen')">
+                        <div class="option-icon-wrapper purple">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="M2 10h20"></path>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Wallet</h4>
+                            <p>Balance, Deposit, Withdraw</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Withdrawal -->
+                    <div class="account-option-card" onclick="navigateTo('withdraw-screen')">
+                        <div class="option-icon-wrapper green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 9v10a2 2 0 002 2h14a2 2 0 002-2V9"></path>
+                                <polyline points="7,13 12,18 17,13"></polyline>
+                                <line x1="12" y1="18" x2="12" y2="3"></line>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Withdrawal</h4>
+                            <p>Withdraw funds</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Transactions, Bet History -->
+                    <!-- 3. Transactions -->
+                    <div class="account-option-card" onclick="navigateTo('transactions-screen')">
+                        <div class="option-icon-wrapper blue">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Transactions</h4>
+                            <p>Deposits & Withdrawals</p>
+                        </div>
+                    </div>
+
+                    <!-- 4. Bet History -->
+                    <div class="account-option-card" onclick="navigateTo('bet-history-screen')">
+                        <div class="option-icon-wrapper pink">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Bet History</h4>
+                            <p>Win / Loss records</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Promotion, Red Envelope -->
+                    <!-- 5. Promotion -->
+                    <div class="account-option-card" onclick="navigateTo('promotions-screen')">
+                        <div class="option-icon-wrapper gold">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Promotion</h4>
+                            <p>Invite & Earn rewards</p>
+                        </div>
+                    </div>
+
+                    <!-- 6. Red Envelope (NEW) -->
+                    <div class="account-option-card" onclick="navigateTo('red-envelope-screen')">
+                        <div class="option-icon-wrapper red">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 12v10H4V12"></path>
+                                <path d="M22 7H2v5h20V7z"></path>
+                                <path d="M12 22V7"></path>
+                                <path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"></path>
+                                <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"></path>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Red Envelope</h4>
+                            <p>Claimed rewards & history</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Security, Support -->
+                    <!-- 7. Security -->
+                    <div class="account-option-card" onclick="navigateTo('security-screen')">
+                        <div class="option-icon-wrapper indigo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Security</h4>
+                            <p>Passwords, Withdrawal pin</p>
+                        </div>
+                    </div>
+
+                    <!-- 8. Support -->
+                    <div class="account-option-card" onclick="navigateTo('support-screen')">
+                        <div class="option-icon-wrapper cyan">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Support</h4>
+                            <p>WhatsApp / Telegram</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Download App, Logout -->
+                    <!-- 9. Download Android App -->
+                    <div class="account-option-card" onclick="
+                                showNotification('Android app coming soon!')
+                            ">
+                        <div class="option-icon-wrapper green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4>Download App</h4>
+                            <p>Android APK</p>
+                        </div>
+                    </div>
+
+                    <!-- 10. Logout -->
+                    <div class="account-option-card logout-card" onclick="handleLogout()">
+                        <div class="option-icon-wrapper orange">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"></path>
+                                <polyline points="16,17 21,12 16,7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div class="option-text">
+                            <h4 class="logout-text">Logout</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== WALLET SCREEN ========== -->
+        <div id="wallet-screen" class="screen">
+            <div class="header wallet-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Wallet</h2>
+                <div class="header-spacer"></div>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="toggleInfoTooltip(event, 'wallet-tooltip')">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="wallet-tooltip">
+                        <p>Available balance shows usable funds.</p>
+                        <p>
+                            Deposits and withdrawals may take time to
+                            process.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content wallet-content">
+                <!-- Balance Card -->
+                <div class="wallet-balance-card">
+                    <p class="wallet-balance-label">Total Balance</p>
+                    <div class="wallet-balance-row">
+                        <span class="wallet-balance-amount">$0.00</span>
+                        <span class="wallet-balance-currency">USD</span>
+                    </div>
+                    <p class="wallet-available-text">Available Balance</p>
+                </div>
+
+                <!-- Add Funds Button -->
+                <div class="wallet-action-card" onclick="navigateTo('add-funds-screen')">
+                    <div class="wallet-action-icon green">
+                        <span>+</span>
+                    </div>
+                    <div class="wallet-action-text">
+                        <h4>Add Funds</h4>
+                        <p>USDT TRC20</p>
+                    </div>
+                </div>
+
+                <!-- Wallet Info Cards -->
+                <div class="wallet-info-card">
+                    <div class="wallet-info-icon purple">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M2 10h20"></path>
+                        </svg>
+                    </div>
+                    <div class="wallet-info-text">
+                        <h4>Wallet Type</h4>
+                        <p>Crypto Wallet</p>
+                    </div>
+                </div>
+
+                <div class="wallet-info-card">
+                    <div class="wallet-info-icon pink">
+                        <span>+</span>
+                    </div>
+                    <div class="wallet-info-text">
+                        <h4>Min Deposit</h4>
+                        <p>$10</p>
+                    </div>
+                </div>
+
+                <div class="wallet-info-card">
+                    <div class="wallet-info-icon gold">
+                        <span>🏆</span>
+                    </div>
+                    <div class="wallet-info-text">
+                        <h4>Min Withdraw</h4>
+                        <p>$20</p>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="wallet-transactions-section">
+                    <h3 class="wallet-section-title">
+                        Recent Transactions
+                    </h3>
+
+                    <!-- Dynamically populated from database -->
+                    <div id="walletRecentTxList">
+                        <p style="
+                                    text-align: center;
+                                    color: rgba(148, 163, 184, 0.5);
+                                    padding: 20px;
+                                    font-size: 13px;
+                                ">
+                            No recent transactions
+                        </p>
+                    </div>
+
+                    <button class="wallet-view-all-btn" onclick="navigateTo('transactions-screen')">
+                        View All
+                    </button>
+                </div>
+
+                <!-- Security Note -->
+                <div class="wallet-security-note">
+                    <span class="note-icon">🔒</span>
+                    <p>
+                        Withdrawals are protected by your account password.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ADD FUNDS SCREEN ========== -->
+        <div id="add-funds-screen" class="screen">
+            <div class="header addfunds-header">
+                <span class="back-btn" onclick="navigateTo('wallet-screen')">←</span>
+                <h2>Add Funds</h2>
+                <div class="header-spacer"></div>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="
+                                toggleInfoTooltip(event, 'addfunds-tooltip')
+                            ">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="addfunds-tooltip">
+                        <p>Send only supported crypto to this address.</p>
+                        <p>Minimum deposit applies.</p>
+                        <p>Funds credit after network confirmation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content addfunds-content">
+                <!-- Main Deposit Card -->
+                <div class="addfunds-main-card">
+                    <h3 class="addfunds-title">
+                        Deposit USDT via TRC20 (TRON)
+                    </h3>
+                    <p class="addfunds-warning-text">
+                        Only send USDT via the TRC20 network.<br />Other
+                        networks will result in lost funds.
+                    </p>
+
+                    <!-- QR and Address Section -->
+                    <div class="addfunds-qr-section">
+                        <!-- QR Code Box -->
+                        <div class="addfunds-qr-box">
+                            <img src="assets/images/barcode.png.jpg" alt="USDT TRC20 QR Code"
+                                style="max-width: 180px; width: 100%; height: auto; display: block; border-radius: 8px;">
+                        </div>
+
+                        <!-- Address Section -->
+                        <div class="addfunds-address-section">
+                            <p class="addfunds-address-label">
+                                USDT TRC20 Wallet Address
+                            </p>
+                            <div class="addfunds-address-row">
+                                <span class="addfunds-address-text" id="walletAddressDisplay">Loading...</span>
+                                <button class="addfunds-copy-btn" onclick="copyWalletAddress()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm Recharge Card -->
+                <div class="addfunds-recharge-card">
+                    <h3 class="addfunds-recharge-title">
+                        Confirm Recharge
+                    </h3>
+
+                    <!-- UID Input -->
+                    <div class="recharge-input-group">
+                        <label class="recharge-input-label">UID</label>
+                        <input type="number" placeholder="Enter your UID" class="recharge-input-field"
+                            id="recharge-uid" />
+                    </div>
+
+                    <!-- Recharge Amount Input -->
+                    <div class="recharge-input-group">
+                        <label class="recharge-input-label">Recharge Amount</label>
+                        <input type="number" placeholder="Enter recharge amount" class="recharge-input-field"
+                            id="recharge-amount" step="0.01" min="0" />
+                    </div>
+
+                    <!-- Confirm Recharge Button -->
+                    <button type="button" class="recharge-confirm-btn" id="recharge-confirm-btn"
+                        onclick="handleRechargeRequest()">
+                        Confirm Recharge
+                    </button>
+                </div>
+
+                <!-- Info Items -->
+                <div class="addfunds-info-list">
+                    <div class="addfunds-info-item">
+                        <span class="info-icon-circle">ℹ</span>
+                        <span>Minimum Deposit: <strong>$10</strong></span>
+                    </div>
+                    <div class="addfunds-info-item">
+                        <span class="info-icon-circle">⏱</span>
+                        <span>Processing Time:
+                            <strong>1–10 minutes</strong></span>
+                    </div>
+                    <div class="addfunds-info-item">
+                        <span class="info-icon-circle">⊗</span>
+                        <span>Network Fee:
+                            <strong>Paid by sender</strong></span>
+                    </div>
+                </div>
+
+                <!-- Last Deposit -->
+                <div class="addfunds-last-deposit" id="lastDepositContainer">
+                    <!-- Dynamically populated by JavaScript -->
+                    <p style="text-align: center; color: rgba(148, 163, 184, 0.6); padding: 15px;">
+                        Loading...
+                    </p>
+                </div>
+
+                <!-- Auto Process Note -->
+                <div class="addfunds-note-card">
+                    <span class="note-icon">🔒</span>
+                    <div class="note-text">
+                        <p>
+                            <strong>Deposits</strong> are processed
+                            automatically.
+                        </p>
+                        <p class="note-subtext">
+                            No manual approval required.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== WITHDRAW SCREEN ========== -->
+        <div id="withdraw-screen" class="screen">
+            <div class="header withdraw-header">
+                <span class="back-btn" onclick="navigateTo('wallet-screen')">←</span>
+                <h2>Withdrawal</h2>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="
+                                toggleInfoTooltip(event, 'withdraw-tooltip')
+                            ">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="withdraw-tooltip">
+                        <p>Withdrawals require security checks.</p>
+                        <p>Minimum withdrawal applies.</p>
+                        <p>Network fees may be deducted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content withdraw-content">
+                <!-- Balance Card -->
+                <div class="withdraw-balance-card">
+                    <p class="withdraw-balance-label">Available Balance</p>
+                    <div class="withdraw-balance-row">
+                        <span class="withdraw-balance-amount">$0.00</span>
+                        <span class="withdraw-balance-currency">USD</span>
+                    </div>
+                    <p class="withdraw-available-text">Available Balance</p>
+                </div>
+
+                <!-- Amount Input -->
+                <div class="withdraw-input-card">
+                    <div class="withdraw-amount-input">
+                        <input type="number" placeholder="Enter Amount (USD)" class="withdraw-amount-field"
+                            id="withdraw-amount" />
+                    </div>
+                    <div class="withdraw-amount-row">
+                        <span class="withdraw-min-text">Min $20</span>
+                        <div class="withdraw-percent-btns">
+                            <button type="button" class="percent-btn" onclick="setWithdrawPercent(25)">
+                                25%
+                            </button>
+                            <button type="button" class="percent-btn" onclick="setWithdrawPercent(50)">
+                                50%
+                            </button>
+                            <button type="button" class="percent-btn" onclick="setWithdrawPercent(100)">
+                                100%
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Note -->
+                <div class="withdraw-warning">
+                    <span class="warning-icon">⚠</span>
+                    <span class="warning-text">Wrong address may result in permanent loss.</span>
+                </div>
+
+                <!-- Wallet Address Section -->
+                <div class="withdraw-address-card">
+                    <p class="withdraw-address-label">
+                        USDT TRC20 Wallet Address
+                    </p>
+                    <div class="withdraw-password-input">
+                        <input type="text" placeholder="Enter USDT TRC20 wallet address" class="withdraw-password-field"
+                            id="walletAddress" name="walletAddress" />
+                    </div>
+                </div>
+
+                <!-- Withdrawal Password Section -->
+                <div class="withdraw-address-card">
+                    <p class="withdraw-address-label">
+                        Withdrawal Password
+                    </p>
+                    <div class="withdraw-password-input">
+                        <input type="password" placeholder="Enter withdrawal password" class="withdraw-password-field"
+                            id="withdrawalPassword" name="withdrawalPassword" />
+                        <button type="button" class="eye-toggle" onclick="
+                                    togglePasswordVisibility(
+                                        'withdrawalPassword',
+                                    )
+                                ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="withdraw-password-note">
+                        Withdrawals are protected by your withdrawal password.
+                    </p>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="withdraw-summary-card">
+                    <div class="summary-row">
+                        <span class="summary-label">Withdrawal Amount:</span>
+                        <span class="summary-value" id="withdrawSummaryAmount">—</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Network Fee:</span>
+                        <span class="summary-value" id="withdrawSummaryFee">—</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">You Will Receive:</span>
+                        <span class="summary-value" id="withdrawSummaryReceive">—</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Processing Time:
+                            <span class="yellow">1–10 minutes</span></span>
+                        <span class="summary-value"></span>
+                    </div>
+                </div>
+
+                <!-- Confirm Button -->
+                <button type="button" class="withdraw-confirm-btn" onclick="handleWithdraw()">
+                    Confirm Withdraw
+                </button>
+
+                <!-- Withdrawal History - Dynamically populated from database -->
+                <div class="withdraw-history-list" id="withdrawHistoryList">
+                    <p style="
+                                text-align: center;
+                                color: rgba(148, 163, 184, 0.5);
+                                padding: 20px;
+                                font-size: 13px;
+                            ">
+                        No withdrawal history yet
+                    </p>
+                </div>
+
+                <button class="withdraw-view-all-btn" onclick="navigateTo('transactions-screen')">
+                    View All
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== TRANSACTIONS SCREEN ========== -->
+        <div id="transactions-screen" class="screen">
+            <div class="header transactions-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Transactions</h2>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="
+                                toggleInfoTooltip(event, 'transactions-tooltip')
+                            ">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="transactions-tooltip">
+                        <p>Pending = Processing.</p>
+                        <p>Completed = Successful.</p>
+                        <p>Failed = Cancelled or reverted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content transactions-content">
+                <!-- Filter Tabs -->
+                <div class="tx-filter-tabs">
+                    <button class="tx-filter-btn active" onclick="switchTab(event, 'all')">
+                        All
+                    </button>
+                    <button class="tx-filter-btn" onclick="switchTab(event, 'deposit')">
+                        Deposit
+                    </button>
+                    <button class="tx-filter-btn" onclick="switchTab(event, 'withdraw')">
+                        Withdraw
+                    </button>
+                    <button class="tx-filter-btn" onclick="switchTab(event, 'win')">
+                        Win
+                    </button>
+                    <button class="tx-filter-btn" onclick="switchTab(event, 'loss')">
+                        Loss
+                    </button>
+                </div>
+
+                <!-- Transaction List - Dynamically populated from database -->
+                <div class="tx-list" id="walletTxPreview">
+                    <p style="
+                                text-align: center;
+                                color: rgba(148, 163, 184, 0.5);
+                                padding: 30px 20px;
+                                font-size: 13px;
+                            ">
+                        Login to view your transactions
+                    </p>
+                </div>
+
+                <button class="tx-view-all-btn" onclick="navigateTo('transactions-screen')">
+                    View All
+                </button>
+
+                <!-- Security Note -->
+                <div class="tx-security-note">
+                    <span class="note-icon">🔒</span>
+                    <p>
+                        All transactions are recorded securely and cannot be
+                        modified.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== BET HISTORY SCREEN ========== -->
+        <div id="bet-history-screen" class="screen">
+            <div class="header bethistory-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Bet History</h2>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="
+                                toggleInfoTooltip(event, 'bethistory-tooltip')
+                            ">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="bethistory-tooltip">
+                        <p>Shows all your bets and results.</p>
+                        <p>Green = Win, Red = Loss.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content bethistory-content">
+                <!-- Filter Tabs -->
+                <div class="bet-filter-tabs">
+                    <button class="bet-filter-btn active" onclick="switchBetTab(event, 'all')">
+                        All
+                    </button>
+                    <button class="bet-filter-btn" onclick="switchBetTab(event, 'win')">
+                        Win
+                    </button>
+                    <button class="bet-filter-btn" onclick="switchBetTab(event, 'loss')">
+                        Loss
+                    </button>
+                </div>
+
+                <!-- Bet List - Dynamically populated from database -->
+                <div class="bet-list">
+                    <p style="
+                                text-align: center;
+                                color: rgba(148, 163, 184, 0.5);
+                                padding: 30px 20px;
+                                font-size: 14px;
+                            ">
+                        No bet history yet. Place your first bet!
+                    </p>
+                </div>
+
+                <!-- Pagination Controls -->
+                <div class="bet-history-full-pagination">
+                    <span class="pagination-info" id="betHistoryFullPaginationInfo">1-10 of 0</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" id="betHistoryFullPrevBtn" onclick="betHistoryFullPrevPage()"
+                            disabled>
+                            &lt;
+                        </button>
+                        <button class="pagination-btn" id="betHistoryFullNextBtn" onclick="betHistoryFullNextPage()">
+                            &gt;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Security Note -->
+                <div class="bet-security-note">
+                    <span class="note-icon">🔒</span>
+                    <p>
+                        All bets are recorded securely and cannot be
+                        modified.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SECURITY SCREEN ========== -->
+        <div id="security-screen" class="screen">
+            <div class="header security-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Security</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="content security-content">
+                <p class="security-subtitle-text">
+                    Manage your account security
+                </p>
+
+                <!-- Change Password Section -->
+                <div class="security-section">
+                    <h3 class="security-section-title">
+                        Change Account Password
+                    </h3>
+                    <p class="security-section-desc">
+                        This password is for login withdrawals.
+                    </p>
+
+                    <div class="security-input-group">
+                        <input type="password" placeholder="Old Password" class="security-input" id="old-password" />
+                        <button type="button" class="eye-toggle" onclick="
+                                    togglePasswordVisibility('old-password')
+                                ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="security-input-group">
+                        <input type="password" placeholder="New Password" class="security-input" id="new-password" />
+                        <button type="button" class="eye-toggle" onclick="
+                                    togglePasswordVisibility('new-password')
+                                ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="security-input-group">
+                        <input type="password" placeholder="Confirm New Password" class="security-input"
+                            id="confirm-password" />
+                        <button type="button" class="eye-toggle" onclick="
+                                    togglePasswordVisibility('confirm-password')
+                                ">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button class="btn-change-password" onclick="handleChangePassword('login')">
+                        Change Password
+                    </button>
+                </div>
+
+                <!-- Password Rules -->
+                <div class="security-info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🔒</span>
+                        <h4>Password Rules</h4>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="bullet blue">●</span>
+                            Minimum 8 characters
+                        </li>
+                        <li>
+                            <span class="bullet blue">●</span>
+                            1 uppercase, 1 number (optional but recommended)
+                        </li>
+                        <li>
+                            <span class="bullet yellow">⚠</span>
+                            Don't reuse old passwords
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Security Tips -->
+                <div class="security-info-card">
+                    <div class="info-card-header">
+                        <span class="info-icon">🔒</span>
+                        <h4>Security Tips</h4>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="bullet blue">●</span>
+                            Never share your password
+                        </li>
+                        <li>
+                            <span class="bullet blue">●</span>
+                            Our team will never ask for your password
+                        </li>
+                        <li>
+                            <span class="bullet blue">●</span>
+                            Beware of fake support messages.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PROMOTIONS SCREEN ========== -->
+        <div id="promotions-screen" class="screen">
+            <div class="header promo-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Promotion</h2>
+                <div class="info-tooltip-wrapper">
+                    <div class="info-icon" onclick="toggleInfoTooltip(event, 'promo-tooltip')">
+                        ?
+                    </div>
+                    <div class="info-tooltip" id="promo-tooltip">
+                        <p>Commission is earned from your referral team.</p>
+                        <p>Rewards are credited automatically.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content promo-content">
+                <!-- Main Stats Card -->
+                <div class="promo-main-card">
+                    <div class="promo-total-commission">
+                        <span class="commission-amount">$0.00</span>
+                    </div>
+                    <div class="promo-stats-row">
+                        <div class="promo-stat-item">
+                            <div class="stat-icon-label">
+                                <span class="stat-icon">👤</span>
+                                <span class="stat-label">Total People Invited</span>
+                            </div>
+                            <p class="stat-value promo-invited-count">0</p>
+                        </div>
+                        <div class="promo-stat-divider"></div>
+                        <div class="promo-stat-item">
+                            <div class="stat-icon-label">
+                                <span class="stat-icon">💰</span>
+                                <span class="stat-label">Total Contribution</span>
+                            </div>
+                            <p class="stat-value promo-contribution-value">
+                                $0.00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo Code Card -->
+                <div class="promo-code-card">
+                    <div class="promo-code-section">
+                        <span class="code-label">My Promo Code</span>
+                        <div class="code-input-row">
+                            <div class="code-input-field">
+                                <span class="code-text">LUX123456</span>
+                            </div>
+                            <button class="copy-btn-rounded" onclick="copyPromoCode()">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="promo-code-section">
+                        <span class="code-label">My Promotion Link</span>
+                        <div class="code-input-row">
+                            <div class="code-input-field link-field">
+                                <span class="code-text link-text">https://bruzoo.games/#/register?</span>
+                            </div>
+                            <button class="copy-btn-rounded link-btn" onclick="copyPromoLink()">
+                                Copy Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level Tabs -->
+                <div class="level-tabs">
+                    <button class="level-tab active" onclick="switchLevelTab(event, 'level1')">
+                        Level 1 <span class="level-count">(0)</span>
+                    </button>
+                    <button class="level-tab" onclick="switchLevelTab(event, 'level2')">
+                        Level 2 <span class="level-count">(0)</span>
+                    </button>
+                    <button class="level-tab" onclick="switchLevelTab(event, 'level3')">
+                        Level 3 <span class="level-count">(0)</span>
+                    </button>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="promo-search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="search" id="promo-search-input" />
+                </div>
+
+                <!-- Commission Table -->
+                <div class="commission-history">
+                    <div class="commission-table">
+                        <div class="commission-row header">
+                            <span>ID</span>
+                            <span>Phone</span>
+                            <span>Water reward</span>
+                            <span>First reward</span>
+                        </div>
+                        <div class="commission-empty-state">
+                            <p>No data available</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="commission-pagination">
+                        <span class="pagination-info">1-10 of 1</span>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" onclick="prevPage()" disabled>
+                                &lt;
+                            </button>
+                            <button class="pagination-btn" onclick="nextPage()">
+                                &gt;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SUPPORT SCREEN ========== -->
+        <div id="support-screen" class="screen">
+            <div class="header support-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Support</h2>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="content support-content">
+                <!-- Customer Support Hero -->
+                <div class="support-hero-card">
+                    <div class="support-hero-icon"
+                        style="border-radius: 50%; overflow: hidden; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                        <img src="assets/images/customersupport.png.jpg" alt="Customer Support"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="support-hero-text">
+                        <h3>Customer Support</h3>
+                        <p>We are available 24/7 to help you.</p>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Support -->
+                <div class="support-contact-card" onclick="
+                            window.open('https://wa.me/1234567890', '_blank')
+                        ">
+                    <div class="contact-icon whatsapp">
+                        <img src="assets/images/whatsapp.png.jpg" alt="WhatsApp"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="contact-info">
+                        <h4>WhatsApp Support</h4>
+                        <p>Fast response (5-10 min)</p>
+                    </div>
+                    <span class="contact-arrow">›</span>
+                </div>
+
+                <!-- Telegram Support -->
+                <div class="support-contact-card" onclick="window.open('https://t.me/luxwin', '_blank')">
+                    <div class="contact-icon telegram">
+                        <img src="assets/images/telegram.png.jpg" alt="Telegram"
+                            style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="contact-info">
+                        <h4>Telegram Support</h4>
+                        <p>Official support channel</p>
+                    </div>
+                    <span class="contact-arrow">›</span>
+                </div>
+
+                <!-- Quick Help Section -->
+                <div class="quick-help-section">
+                    <h3 class="quick-help-title">Quick Help</h3>
+                    <div class="quick-help-grid">
+                        <div class="quick-help-item" onclick="
+                                    window.open(
+                                        'https://wa.me/1234567890',
+                                        '_blank',
+                                    )
+                                ">
+                            <span class="quick-icon">💰</span>
+                            <span>Deposit Not Received</span>
+                        </div>
+                        <div class="quick-help-item" onclick="
+                                    window.open(
+                                        'https://wa.me/1234567890',
+                                        '_blank',
+                                    )
+                                ">
+                            <span>Withdrawal Pending</span>
+                        </div>
+                        <div class="quick-help-item" onclick="
+                                    window.open(
+                                        'https://wa.me/1234567890',
+                                        '_blank',
+                                    )
+                                ">
+                            <span class="quick-icon">🎮</span>
+                            <span>Game Result Issue</span>
+                        </div>
+                        <div class="quick-help-item" onclick="
+                                    window.open(
+                                        'https://wa.me/1234567890',
+                                        '_blank',
+                                    )
+                                ">
+                            <span>Account / Password Problem</span>
+                        </div>
+                    </div>
+                    <div class="quick-help-single" onclick="
+                                window.open(
+                                    'https://wa.me/1234567890',
+                                    '_blank',
+                                )
+                            ">
+                        <span class="quick-icon">📢</span>
+                        <span>Promotion / Commission Issue</span>
+                        <span class="contact-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- Safety Notice -->
+                <div class="safety-notice">
+                    <span class="safety-icon">🔒</span>
+                    <p>
+                        For your safety, never share your password or OTP
+                        with anyone.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PRIVACY POLICY SCREEN ========== -->
+        <div id="privacy-policy-screen" class="screen">
+            <div class="header policy-header">
+                <span class="back-btn" onclick="navigateTo('account-screen')">←</span>
+                <h2>Privacy Policy</h2>
+            </div>
+
+            <div class="content policy-content">
+                <div class="policy-container">
+                    <!-- Header -->
+                    <div class="policy-main-title">
+                        <h2>PRIVACY POLICY</h2>
+                        <p class="policy-updated">
+                            Last Updated: February 2026
+                        </p>
+                    </div>
+
+                    <p class="policy-intro">
+                        Welcome to our platform. Your privacy is extremely important to us. This Privacy Policy explains
+                        how we collect, use, protect, and handle your information when you use our website and services.
+                    </p>
+
+                    <p class="policy-intro">
+                        By registering or using our services, you agree to this Privacy Policy.
+                    </p>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 1 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            1. Information We Collect
+                        </h3>
+
+                        <h4 class="policy-subsection-title">a) Personal Information</h4>
+                        <ul class="policy-list">
+                            <li>Email address</li>
+                            <li>Username</li>
+                            <li>User ID</li>
+                            <li>Transaction details</li>
+                            <li>Wallet address (for deposits and withdrawals)</li>
+                        </ul>
+
+                        <h4 class="policy-subsection-title">b) Technical Information</h4>
+                        <ul class="policy-list">
+                            <li>IP address</li>
+                            <li>Device type</li>
+                            <li>Browser type</li>
+                            <li>Operating system</li>
+                            <li>Login timestamps</li>
+                        </ul>
+
+                        <h4 class="policy-subsection-title">c) Transaction Information</h4>
+                        <ul class="policy-list">
+                            <li>Deposit records</li>
+                            <li>Withdrawal requests</li>
+                            <li>Game activity history</li>
+                            <li>Bet results</li>
+                        </ul>
+
+                        <p class="policy-text policy-highlight">
+                            We do NOT collect unnecessary identity documents unless required by law.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 2 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            2. How We Use Your Information
+                        </h3>
+                        <p class="policy-text">
+                            Your information is used to:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Create and manage your account</li>
+                            <li>Process deposits and withdrawals</li>
+                            <li>Maintain transaction records</li>
+                            <li>Improve platform performance</li>
+                            <li>Prevent fraud and abuse</li>
+                            <li>Provide customer support</li>
+                            <li>Comply with legal obligations</li>
+                        </ul>
+                        <p class="policy-text policy-highlight">
+                            We do NOT sell your personal data to third parties.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 3 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            3. Data Security
+                        </h3>
+                        <p class="policy-text">
+                            We implement security measures including:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Encrypted data transmission</li>
+                            <li>Secure server storage</li>
+                            <li>Access control restrictions</li>
+                            <li>Regular monitoring</li>
+                        </ul>
+                        <p class="policy-text policy-highlight">
+                            Users are responsible for keeping their login credentials secure.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 4 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            4. Cookies & Tracking
+                        </h3>
+                        <p class="policy-text">
+                            We may use cookies to:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Maintain login sessions</li>
+                            <li>Improve user experience</li>
+                            <li>Analyze traffic</li>
+                            <li>Enhance performance</li>
+                        </ul>
+                        <p class="policy-text">
+                            Disabling cookies may affect certain features.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 5 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            5. Third-Party Services
+                        </h3>
+                        <p class="policy-text">
+                            We may use third-party services for:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Payment processing</li>
+                            <li>Blockchain verification</li>
+                            <li>Analytics</li>
+                            <li>Support tools</li>
+                        </ul>
+                        <p class="policy-text">
+                            We are not responsible for external platforms' privacy practices.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 6 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            6. Account Responsibility
+                        </h3>
+                        <p class="policy-text">
+                            Users are responsible for:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Keeping login credentials secure</li>
+                            <li>Entering correct wallet addresses</li>
+                            <li>Providing accurate information</li>
+                        </ul>
+                        <p class="policy-text policy-highlight">
+                            We are not liable for losses caused by user negligence.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 7 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            7. Data Retention
+                        </h3>
+                        <p class="policy-text">
+                            We retain necessary data for:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Operational purposes</li>
+                            <li>Legal compliance</li>
+                            <li>Fraud prevention</li>
+                        </ul>
+                        <p class="policy-text">
+                            Some data may remain stored even after account closure if legally required.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 8 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            8. Age Restriction
+                        </h3>
+                        <p class="policy-text policy-highlight">
+                            This platform is strictly for users 18 years or older. By registering, you confirm that you
+                            meet the legal age requirement.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 9 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            9. Policy Updates
+                        </h3>
+                        <p class="policy-text">
+                            We reserve the right to update this Privacy Policy at any time. Continued use of the
+                            platform means you accept the updated policy.
+                        </p>
+                    </section>
+
+                    <div class="policy-divider"></div>
+
+                    <!-- Section 10 -->
+                    <section class="policy-section">
+                        <h3 class="policy-section-title">
+                            10. Contact
+                        </h3>
+                        <p class="policy-text">
+                            For any privacy-related concerns, please contact support through the Support section of the
+                            platform.
+                        </p>
+                    </section>
+
+                    <!-- Footer -->
+                    <div class="policy-footer">
+                        <p class="policy-end">END OF DOCUMENT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== GLOBAL BOTTOM NAVIGATION ========== -->
+        <nav id="global-bottom-nav" class="bottom-nav">
+            <div class="nav-item" onclick="handleNavClick('fun')">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <span>Fun</span>
+            </div>
+            <div class="nav-item active" onclick="handleNavClick('home')">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                    </svg>
+                </div>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" onclick="handleNavClick('account')">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                </div>
+                <span>Account</span>
+            </div>
+        </nav>
+
+        <!-- ========== LOGIN REQUIRED MODAL ========== -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+                <h2>🔐 Login Required</h2>
+                <p class="modal-text">
+                    Please <strong>Login</strong> or
+                    <strong>Sign Up</strong> to
+                    <span class="modal-action-text">place a bet</span>.
+                </p>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="handleLoginFromModal()">
+                        Login
+                    </button>
+                    <button class="btn btn-secondary" onclick="handleSignupFromModal()">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== PROMOTIONS MODAL ========== -->
+        <div id="promo-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closePromoModal()">&times;</span>
+                <h2>🎁 Referral Program</h2>
+                <p class="modal-text">
+                    Invite your friends and earn commissions on their bets!
+                    Share your referral code and earn rewards on multiple
+                    levels.
+                </p>
+                <ul class="modal-list">
+                    <li>
+                        <strong>Level 1:</strong> 5% commission on direct
+                        referrals
+                    </li>
+                    <li>
+                        <strong>Level 2:</strong> 2% commission on their
+                        referrals
+                    </li>
+                    <li>
+                        <strong>Level 3:</strong> 1% commission on 3rd level
+                    </li>
+                    <li>
+                        <strong>First Deposit Bonus:</strong> $5 when they
+                        make their first deposit
+                    </li>
+                </ul>
+                <button class="btn btn-primary" onclick="closePromoModal()">
+                    Got It!
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== BET AMOUNT MODAL ========== -->
+        <div id="bet-modal-overlay" class="bet-modal-overlay">
+            <div class="bet-modal">
+                <div class="bet-modal-header">
+                    <h3>Select Amount</h3>
+                    <button class="bet-modal-close" onclick="closeBetModal()">
+                        ×
+                    </button>
+                </div>
+                <div class="bet-modal-selection">
+                    <span id="bet-modal-selection-text">RED</span>
+                </div>
+                <div class="bet-chips">
+                    <button type="button" class="bet-chip" onclick="selectBetChip(10)">
+                        $10
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(50)">
+                        $50
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(100)">
+                        $100
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(500)">
+                        $500
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(1000)">
+                        $1K
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(5000)">
+                        $5K
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(10000)">
+                        $10K
+                    </button>
+                    <button type="button" class="bet-chip" onclick="selectBetChip(50000)">
+                        $50K
+                    </button>
+                </div>
+                <div class="bet-custom-input">
+                    <input type="number" id="bet-custom-amount" placeholder="Custom amount..." min="1" />
+                </div>
+                <button type="button" class="bet-confirm-btn" onclick="confirmBet(event)">
+                    PLACE BET
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== VIP MODAL ========== -->
+        <div class="vip-modal-overlay" id="vipModalOverlay" onclick="closeVIPModal()"></div>
+        <div class="vip-modal" id="vipModal">
+            <div class="vip-modal-header">
+                <h2>VIP Program</h2>
+                <button class="vip-modal-close" onclick="closeVIPModal()">×</button>
+            </div>
+
+            <div class="vip-modal-content">
+                <!-- Current Status Section -->
+                <div class="vip-status-card"
+                    style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(124, 58, 237, 0.05)); border: 1px solid rgba(147, 51, 234, 0.3); border-radius: 16px; padding: 24px; margin-bottom: 20px;">
+                    <!-- Current Level Badge -->
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div id="vipBadgeContainer" style="display: inline-block; position: relative;">
+                            <div id="vipBadgeBackground"
+                                style="display: inline-block; background: linear-gradient(135deg, #9333ea, #7c3aed); padding: 12px 32px; border-radius: 50px; box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4); position: relative; z-index: 2;">
+                                <span style="font-size: 24px; font-weight: 700; color: white; letter-spacing: 1px;"
+                                    id="vipCurrentLevel">VIP 0</span>
+                            </div>
+                            <!-- Fire animation elements (hidden by default) -->
+                            <div id="vipFireEffect"
+                                style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120%; height: 120%; pointer-events: none; z-index: 1;">
+                                <div class="fire-particle"
+                                    style="position: absolute; bottom: 0; left: 20%; width: 8px; height: 8px; background: radial-gradient(circle, #ff6b00, #ff0000); border-radius: 50%; animation: fire-rise 1.5s infinite ease-out;">
+                                </div>
+                                <div class="fire-particle"
+                                    style="position: absolute; bottom: 0; left: 40%; width: 10px; height: 10px; background: radial-gradient(circle, #ffa500, #ff4500); border-radius: 50%; animation: fire-rise 1.8s infinite ease-out 0.3s;">
+                                </div>
+                                <div class="fire-particle"
+                                    style="position: absolute; bottom: 0; left: 60%; width: 7px; height: 7px; background: radial-gradient(circle, #ff8c00, #ff0000); border-radius: 50%; animation: fire-rise 1.6s infinite ease-out 0.6s;">
+                                </div>
+                                <div class="fire-particle"
+                                    style="position: absolute; bottom: 0; left: 80%; width: 9px; height: 9px; background: radial-gradient(circle, #ff6b00, #ff4500); border-radius: 50%; animation: fire-rise 2s infinite ease-out 0.9s;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        @keyframes fire-rise {
+                            0% {
+                                transform: translateY(0) scale(1);
+                                opacity: 1;
+                            }
+
+                            50% {
+                                transform: translateY(-30px) scale(1.2);
+                                opacity: 0.8;
+                            }
+
+                            100% {
+                                transform: translateY(-60px) scale(0.5);
+                                opacity: 0;
+                            }
+                        }
+
+                        @keyframes fire-glow {
+
+                            0%,
+                            100% {
+                                box-shadow: 0 4px 15px rgba(255, 107, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.4);
+                            }
+
+                            50% {
+                                box-shadow: 0 4px 25px rgba(255, 107, 0, 0.9), 0 0 50px rgba(255, 69, 0, 0.6);
+                            }
+                        }
+
+                        #vipBadgeContainer.max-level #vipBadgeBackground {
+                            background: linear-gradient(135deg, #ff6b00, #ff4500, #ff0000) !important;
+                            animation: fire-glow 2s infinite ease-in-out;
+                        }
+                    </style>
+
+                    <!-- Stats Grid -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                        <!-- Total Wager -->
+                        <div
+                            style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px; text-align: center;">
+                            <div style="font-size: 24px; margin-bottom: 6px;">💰</div>
+                            <div
+                                style="font-size: 12px; color: rgba(148, 163, 184, 0.8); margin-bottom: 6px; font-weight: 500;">
+                                Total Wager</div>
+                            <div style="font-size: 20px; font-weight: 700; color: #fbbf24;" id="vipTotalWager">$0.00
+                            </div>
+                        </div>
+
+                        <!-- Next Level -->
+                        <div
+                            style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px; text-align: center;">
+                            <div style="font-size: 24px; margin-bottom: 6px;">🎯</div>
+                            <div
+                                style="font-size: 12px; color: rgba(148, 163, 184, 0.8); margin-bottom: 6px; font-weight: 500;">
+                                Next Level</div>
+                            <div style="font-size: 20px; font-weight: 700; color: #a78bfa;" id="vipNextLevel">VIP 1
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Section -->
+                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div>
+                                <div style="font-size: 12px; color: rgba(148, 163, 184, 0.8); margin-bottom: 4px;">
+                                    Required for Next Level</div>
+                                <div style="font-size: 18px; font-weight: 700; color: white;" id="vipRequired">$500.00
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 12px; color: rgba(148, 163, 184, 0.8); margin-bottom: 4px;">
+                                    Progress</div>
+                                <div style="font-size: 18px; font-weight: 700; color: #10b981;" id="vipProgress">0%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vip-progress-bar-container"
+                            style="background: rgba(0, 0, 0, 0.3); border-radius: 50px; height: 12px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);">
+                            <div class="vip-progress-bar">
+                                <div class="vip-progress-fill" id="vipProgressFill"
+                                    style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399); border-radius: 50px; transition: width 0.5s ease; box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Benefits -->
+                <div class="vip-benefits-card">
+                    <h3>Current Level Benefits</h3>
+                    <div class="vip-benefit-row">
+                        <span class="vip-benefit-icon">🎁</span>
+                        <span class="vip-benefit-label">Upgrade Bonus:</span>
+                        <span class="vip-benefit-value" id="vipCurrentBonus">$0</span>
+                    </div>
+                    <div class="vip-benefit-row">
+                        <span class="vip-benefit-icon">💸</span>
+                        <span class="vip-benefit-label">Withdrawal Fee:</span>
+                        <span class="vip-benefit-value" id="vipCurrentFee">10%</span>
+                    </div>
+                </div>
+
+                <!-- Pending VIP Bonus Section -->
+                <div class="vip-benefits-card vip-pending-bonus-card" id="vipPendingBonusCard"
+                    style="display: none; background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.05)); border: 1px solid rgba(251, 191, 36, 0.3);">
+                    <h3 style="color: #fbbf24;">🎁 Pending VIP Bonus</h3>
+                    <div class="vip-benefit-row" style="justify-content: center; margin: 15px 0;">
+                        <span class="vip-benefit-value" id="vipPendingBonusAmount"
+                            style="font-size: 32px; font-weight: 700; color: #fbbf24;">$0</span>
+                    </div>
+                    <button class="vip-claim-bonus-btn" id="vipClaimBonusBtn" onclick="claimVIPBonus()"
+                        style="width: 100%; padding: 14px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1e1b4b; font-weight: 700; font-size: 16px; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; margin-top: 10px;">
+                        Claim VIP Bonus
+                    </button>
+                </div>
+
+                <!-- Next Level Preview -->
+                <div class="vip-benefits-card vip-next-benefits" id="vipNextBenefitsCard">
+                    <h3>Next Level Benefits</h3>
+                    <div class="vip-benefit-row">
+                        <span class="vip-benefit-icon">🎁</span>
+                        <span class="vip-benefit-label">Upgrade Bonus:</span>
+                        <span class="vip-benefit-value" id="vipNextBonus">$5</span>
+                    </div>
+                    <div class="vip-benefit-row">
+                        <span class="vip-benefit-icon">💸</span>
+                        <span class="vip-benefit-label">Withdrawal Fee:</span>
+                        <span class="vip-benefit-value" id="vipNextFee">8%</span>
+                    </div>
+                </div>
+
+                <!-- All VIP Levels Table -->
+                <div class="vip-table-container">
+                    <h3>All VIP Levels</h3>
+                    <table class="vip-table">
+                        <thead>
+                            <tr>
+                                <th>Level</th>
+                                <th>Wager Required</th>
+                                <th>Upgrade Bonus</th>
+                                <th>Withdrawal Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vipTableBody">
+                            <!-- Dynamically populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="auth-manager.js?v=20260215114000"></script>
+        <script src="app.js?v=20260215114000"></script>
+</body>
+
+</html>

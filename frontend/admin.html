@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LuxWin Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+    <!-- Admin Login Screen -->
+    <div id="admin-login-screen" class="admin-login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1 class="admin-logo">LuxWin</h1>
+                <span class="admin-badge">ADMIN PANEL</span>
+            </div>
+            <form id="admin-login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" name="username" placeholder="Enter admin username"
+                        required />
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" name="password" placeholder="Enter admin password"
+                        required />
+                </div>
+                <div id="login-error" class="login-error" style="display: none"></div>
+                <button type="submit" class="login-btn">
+                    Login to Admin Panel
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-container" id="admin-dashboard" style="display: none">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="admin-logo">LuxWin</h1>
+                <span class="admin-badge">ADMIN</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-link" data-section="users">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Users</span>
+                </a>
+                <a href="#" class="nav-link" data-section="withdrawals">
+                    <span class="nav-icon">💸</span>
+                    <span class="nav-text">Recharge / Withdrawals</span>
+                </a>
+                <a href="#" class="nav-link" data-section="game-control">
+                    <span class="nav-icon">🎮</span>
+                    <span class="nav-text">Game Control</span>
+                </a>
+                <a href="#" class="nav-link" data-section="red-envelope">
+                    <span class="nav-icon">🧧</span>
+                    <span class="nav-text">Red Envelope</span>
+                </a>
+                <a href="#" class="nav-link" data-section="referral-control">
+                    <span class="nav-icon">👨‍👩‍👧‍👦</span>
+                    <span class="nav-text">Referral Control</span>
+                </a>
+                <a href="#" class="nav-link" data-section="security-flags">
+                    <span class="nav-icon">🛡️</span>
+                    <span class="nav-text">Security / Flags</span>
+                </a>
+                <a href="#" class="nav-link" data-section="promotions">
+                    <span class="nav-icon">🎁</span>
+                    <span class="nav-text">Promotions</span>
+                </a>
+                <a href="#" class="nav-link" data-section="announcements">
+                    <span class="nav-icon">📢</span>
+                    <span class="nav-text">Announcements</span>
+                </a>
+                <a href="#" class="nav-link" data-section="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link logout" onclick="adminLogout()">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <h2 class="page-title" id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="admin-profile">
+                        <span class="admin-name">Admin User</span>
+                        <div class="admin-avatar">👨‍💼</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header" style="margin-bottom: 20px">
+                    <h3>Dashboard Overview</h3>
+                    <button class="btn btn-primary" onclick="refreshDashboard()">
+                        🔄 Refresh
+                    </button>
+                </div>
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="card-icon users">👥</div>
+                        <div class="card-info">
+                            <span class="card-value">0</span>
+                            <span class="card-label">Total Users</span>
+                        </div>
+                        <span class="card-trend up"></span>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon deposits">💰</div>
+                        <div class="card-info">
+                            <span class="card-value">$0</span>
+                            <span class="card-label">Total Deposits</span>
+                        </div>
+                        <span class="card-trend up"></span>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon withdrawals">💸</div>
+                        <div class="card-info">
+                            <span class="card-value">$0</span>
+                            <span class="card-label">Total Withdrawals</span>
+                        </div>
+                        <span class="card-trend down"></span>
+                    </div>
+                    <div class="summary-card profit">
+                        <div class="card-icon profit-icon">📈</div>
+                        <div class="card-info">
+                            <span class="card-value">$0</span>
+                            <span class="card-label">Today's Profit</span>
+                        </div>
+                        <span class="card-trend up"></span>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3 class="card-title">Recent Activity</h3>
+                        <div class="activity-list">
+                            <!-- Loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3 class="card-title">Live Game Stats</h3>
+                        <div class="game-stats">
+                            <div class="stat-row">
+                                <span class="stat-label">Current Round</span>
+                                <span class="stat-value">#--</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Active Players</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Total Bets This Round</span>
+                                <span class="stat-value">$0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Rounds Today</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Today's Bets</span>
+                                <span class="stat-value">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="content-section">
+                <div class="section-header">
+                    <h3>User Management</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="loadUsers()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Search users by email, username, or ID..." class="search-input"
+                        id="userSearchInput" onkeypress="
+                                if (event.key === 'Enter') searchUsers();
+                            " />
+                    <button class="btn btn-primary" onclick="searchUsers()">
+                        Search
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Balance</th>
+                                <th>Total Deposits</th>
+                                <th>Total Bets</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- Loaded dynamically -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" style="display: none">
+                    <button class="page-btn">« Prev</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">4</button>
+                    <button class="page-btn">5</button>
+                    <button class="page-btn">Next »</button>
+                </div>
+            </section>
+
+            <!-- Recharge / Withdrawals Section -->
+            <section id="withdrawals" class="content-section">
+                <div class="section-header">
+                    <h3>Recharge / Withdrawals</h3>
+                </div>
+
+                <!-- Main Tabs: Deposits / Withdrawals -->
+                <div class="main-tabs">
+                    <button class="main-tab active" onclick="switchRechargeTab('deposits')">
+                        Deposits
+                    </button>
+                    <button class="main-tab" onclick="switchRechargeTab('withdrawals')">
+                        Withdrawals
+                    </button>
+                </div>
+
+                <!-- Deposits Tab Content -->
+                <div id="deposits-tab" class="tab-content active">
+                    <div class="section-header" style="margin-top: 20px;">
+                        <h4>Recharge Requests</h4>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" onclick="filterRechargeRequests('all')">All</button>
+                            <button class="filter-tab" onclick="filterRechargeRequests('pending')">Pending</button>
+                            <button class="filter-tab" onclick="filterRechargeRequests('approved')">Approved</button>
+                            <button class="filter-tab" onclick="filterRechargeRequests('rejected')">Rejected</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>UID</th>
+                                    <th>Email</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recharge-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Withdrawals Tab Content -->
+                <div id="withdrawals-tab" class="tab-content">
+                    <div class="section-header" style="margin-top: 20px;">
+                        <h4>Withdrawal Requests</h4>
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" onclick="filterWithdrawals('all')">All</button>
+                            <button class="filter-tab" onclick="filterWithdrawals('pending')">Pending</button>
+                            <button class="filter-tab" onclick="filterWithdrawals('approved')">Approved</button>
+                            <button class="filter-tab" onclick="filterWithdrawals('rejected')">Rejected</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Wallet Address</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="withdrawal-table-body">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Confirmation Modal -->
+            <div id="confirmationModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3 id="modalTitle">Confirm Action</h3>
+                    <p id="modalMessage">Are you sure you want to proceed?</p>
+                    <div class="modal-actions">
+                        <button class="btn btn-secondary" onclick="closeConfirmationModal()">Cancel</button>
+                        <button class="btn btn-primary" id="modalConfirmBtn">Confirm</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Control Section -->
+            <section id="game-control" class="content-section">
+                <div class="game-control-grid">
+                    <!-- Current Round Info -->
+                    <div class="control-card">
+                        <h3 class="card-title">Current Round</h3>
+                        <div class="round-display">
+                            <div class="round-id">#--</div>
+                            <div class="countdown-display">
+                                <div class="countdown-circle">
+                                    <span class="countdown-value" id="gameCountdown">--:--</span>
+                                </div>
+                                <span class="countdown-label">Time Remaining</span>
+                            </div>
+                        </div>
+                        <div class="round-stats">
+                            <div class="round-stat">
+                                <span class="stat-label">Players</span>
+                                <span class="stat-value">0</span>
+                            </div>
+                            <div class="round-stat">
+                                <span class="stat-label">Total Bets</span>
+                                <span class="stat-value">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Selection -->
+                    <div class="control-card">
+                        <h3 class="card-title">Select Next Result</h3>
+                        <div class="color-selection">
+                            <button class="color-select-btn green" onclick="selectColor('green')">
+                                <span class="color-name">Green</span>
+                                <span class="color-odds">2x</span>
+                            </button>
+                            <button class="color-select-btn red" onclick="selectColor('red')">
+                                <span class="color-name">Red</span>
+                                <span class="color-odds">2x</span>
+                            </button>
+                            <button class="color-select-btn violet" onclick="selectColor('violet')">
+                                <span class="color-name">Violet</span>
+                                <span class="color-odds">4.5x</span>
+                            </button>
+                        </div>
+                        <div class="number-selection">
+                            <p class="selection-label">
+                                Or Select Number (0-9)
+                            </p>
+                            <div class="number-grid">
+                                <button class="number-select-btn" onclick="selectNumber(0)">
+                                    0
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(1)">
+                                    1
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(2)">
+                                    2
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(3)">
+                                    3
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(4)">
+                                    4
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(5)">
+                                    5
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(6)">
+                                    6
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(7)">
+                                    7
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(8)">
+                                    8
+                                </button>
+                                <button class="number-select-btn" onclick="selectNumber(9)">
+                                    9
+                                </button>
+                            </div>
+                        </div>
+                        <div class="selected-result">
+                            <span>Selected: </span>
+                            <span id="selectedResult" class="result-badge">None</span>
+                        </div>
+                    </div>
+
+                    <!-- Control Toggles -->
+                    <div class="control-card">
+                        <h3 class="card-title">Game Controls</h3>
+                        <div class="control-toggles">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Auto Mode</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoMode" checked />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-status" id="autoStatus">ON</span>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="toggle-label">Manual Override</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="manualOverride" />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-status" id="manualStatus">OFF</span>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="toggle-label">Pause Game</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="pauseGame" />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-status" id="pauseStatus">OFF</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary full-width" onclick="applyGameSettings()">
+                            Apply Settings
+                        </button>
+                    </div>
+
+                    <!-- Upcoming Round -->
+                    <div class="control-card">
+                        <h3 class="card-title">Upcoming Round</h3>
+                        <div class="upcoming-info">
+                            <div class="upcoming-row">
+                                <span class="label">Next Round ID</span>
+                                <span class="value" id="nextRoundId">#--</span>
+                            </div>
+                            <div class="upcoming-row">
+                                <span class="label">Expected Players</span>
+                                <span class="value" id="expectedPlayers">~0</span>
+                            </div>
+                            <div class="upcoming-row">
+                                <span class="label">Predicted Bets</span>
+                                <span class="value" id="predictedBets">~$0</span>
+                            </div>
+                            <div class="upcoming-row">
+                                <span class="label">House Edge</span>
+                                <span class="value">5%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Results -->
+                <div class="control-card full-width">
+                    <h3 class="card-title">
+                        Recent Results (Last 10 Rounds)
+                    </h3>
+                    <div class="recent-results" id="recentResults">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Red Envelope Section -->
+            <section id="red-envelope" class="content-section">
+                <div class="envelope-grid">
+                    <!-- Create Red Envelope -->
+                    <div class="control-card">
+                        <h3 class="card-title">🧧 Create Red Envelope</h3>
+                        <form class="envelope-form" id="createEnvelopeForm">
+                            <div class="form-group">
+                                <label>Reward Amount ($)</label>
+                                <input type="number" id="envelopeAmount" placeholder="Enter reward amount"
+                                    class="form-input" value="10" min="1" step="1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Max Claims (Users)</label>
+                                <input type="number" id="envelopeMaxClaims" placeholder="Number of users who can claim"
+                                    class="form-input" value="100" min="1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Eligibility Rule</label>
+                                <select class="form-input" id="envelopeEligibility">
+                                    <option value="all">All Users</option>
+                                    <option value="new_user">
+                                        New Users Only
+                                    </option>
+                                    <option value="deposited">
+                                        Users with Deposit
+                                    </option>
+                                    <option value="wagered">
+                                        Users who Wagered
+                                    </option>
+                                    <option value="vip">VIP Only</option>
+                                    <option value="specific_user">Specific User (UID Only)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="targetUidGroup" style="display: none;">
+                                <label>Target User UID</label>
+                                <input type="text" id="targetUid" placeholder="Enter User UID" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label>Expiry (Hours)</label>
+                                <input type="number" id="envelopeExpiry"
+                                    placeholder="Hours until expiry (0 = no expiry)" class="form-input" value="24"
+                                    min="0" />
+                            </div>
+                            <div class="toggle-row">
+                                <span class="toggle-label">Activate Immediately</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="envelopeActive" checked />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="createRedEnvelope()">
+                                Create Red Envelope
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Envelope Stats -->
+                    <div class="control-card">
+                        <h3 class="card-title">📊 Envelope Statistics</h3>
+                        <div class="envelope-stats" id="envelopeStats">
+                            <div class="env-stat-card">
+                                <span class="env-stat-value" id="activeEnvelopes">0</span>
+                                <span class="env-stat-label">Active Envelopes</span>
+                            </div>
+                            <div class="env-stat-card">
+                                <span class="env-stat-value" id="totalDistributed">$0</span>
+                                <span class="env-stat-label">Total Distributed</span>
+                            </div>
+                            <div class="env-stat-card">
+                                <span class="env-stat-value" id="claimedAmount">$0</span>
+                                <span class="env-stat-label">Claimed Amount</span>
+                            </div>
+                            <div class="env-stat-card">
+                                <span class="env-stat-value" id="totalClaims">0</span>
+                                <span class="env-stat-label">Total Claims</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Envelope History -->
+                <div class="control-card full-width">
+                    <h3 class="card-title">Red Envelope History</h3>
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Envelope ID</th>
+                                    <th>Total Amount</th>
+                                    <th>Claimed</th>
+                                    <th>Remaining</th>
+                                    <th>Claims</th>
+                                    <th>Created</th>
+                                    <th>Expires</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Promotions Section -->
+            <section id="promotions" class="content-section">
+                <div class="promo-grid">
+                    <!-- Commission Settings -->
+                    <div class="control-card">
+                        <h3 class="card-title">Commission Rates</h3>
+                        <form class="promo-form">
+                            <div class="form-group">
+                                <label>Level 1 Commission (%)</label>
+                                <input type="number" class="form-input" value="5" step="0.1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Level 2 Commission (%)</label>
+                                <input type="number" class="form-input" value="3" step="0.1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Level 3 Commission (%)</label>
+                                <input type="number" class="form-input" value="1" step="0.1" />
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="updateCommissionRates()">
+                                Update Rates
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- First Deposit Bonus -->
+                    <div class="control-card">
+                        <h3 class="card-title">First Deposit Bonus</h3>
+                        <form class="promo-form">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Enable Bonus</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Bonus Percentage (%)</label>
+                                <input type="number" class="form-input" value="10" step="1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Bonus ($)</label>
+                                <input type="number" class="form-input" value="100" />
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Deposit ($)</label>
+                                <input type="number" class="form-input" value="50" />
+                            </div>
+                            <button type="button" class="btn btn-primary full-width"
+                                onclick="updateFirstRechargeBonus()">
+                                Update Bonus
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Bet Tax Settings -->
+                    <div class="control-card">
+                        <h3 class="card-title">💰 Bet Tax Settings</h3>
+                        <form class="promo-form" id="betTaxForm">
+                            <div class="form-group">
+                                <label>Platform Tax (%)</label>
+                                <input type="number" class="form-input" id="betTaxPercent" value="10" step="0.1" min="0"
+                                    max="50" />
+                                <small style="color: #9ca3af; font-size: 11px">Tax deducted from each bet
+                                    (0-50%)</small>
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="updateBetTax()">
+                                Update Tax Rate
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Promo Stats -->
+                    <div class="control-card">
+                        <h3 class="card-title">Promotion Statistics</h3>
+                        <div class="promo-stats" id="promoStatsContainer">
+                            <div class="promo-stat-row">
+                                <span class="label">Total Referrals</span>
+                                <span class="value" id="statTotalReferrals">0</span>
+                            </div>
+                            <div class="promo-stat-row">
+                                <span class="label">Commission Paid (Today)</span>
+                                <span class="value green" id="statTodayCommission">$0.00</span>
+                            </div>
+                            <div class="promo-stat-row">
+                                <span class="label">Commission Paid (Total)</span>
+                                <span class="value green" id="statTotalCommission">$0.00</span>
+                            </div>
+                            <div class="promo-stat-row">
+                                <span class="label">First Deposit Bonuses</span>
+                                <span class="value" id="statFirstDepositBonus">$0.00</span>
+                            </div>
+                            <div class="promo-stat-row">
+                                <span class="label">Active Promoters</span>
+                                <span class="value" id="statActivePromoters">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="content-section">
+                <div class="announce-grid">
+                    <!-- Create Announcement -->
+                    <div class="control-card">
+                        <h3 class="card-title">📢 Create Announcement</h3>
+                        <form class="announce-form">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" placeholder="Announcement title" class="form-input" />
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Enter your announcement message..." class="form-textarea"
+                                    rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select class="form-input">
+                                    <option value="info">Info</option>
+                                    <option value="warning">Warning</option>
+                                    <option value="success">Success</option>
+                                    <option value="promo">Promotion</option>
+                                </select>
+                            </div>
+                            <div class="toggle-row">
+                                <span class="toggle-label">Show as Popup</span>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" />
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="createAnnouncement()">
+                                Publish Announcement
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Announcement List -->
+                    <div class="control-card">
+                        <h3 class="card-title">Active Announcements</h3>
+                        <div class="announcement-list">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="settings-grid">
+                    <div class="control-card">
+                        <h3 class="card-title">⚙️ General Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Site Name</label>
+                                <input type="text" class="form-input" value="LuxWin" />
+                            </div>
+                            <div class="form-group">
+                                <label>Support Email</label>
+                                <input type="email" class="form-input" value="support@luxwin.com" />
+                            </div>
+                            <div class="form-group">
+                                <label>Support WhatsApp</label>
+                                <input type="text" class="form-input" value="+1234567890" />
+                            </div>
+                            <div class="form-group">
+                                <label>Telegram Channel</label>
+                                <input type="text" class="form-input" value="@luxwin_official" />
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="saveGeneralSettings()">
+                                Save Settings
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="control-card">
+                        <h3 class="card-title">🎮 Game Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Round Duration (seconds)</label>
+                                <input type="number" class="form-input" value="180" />
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Bet ($)</label>
+                                <input type="number" class="form-input" value="1" />
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Bet ($)</label>
+                                <input type="number" class="form-input" value="1000" />
+                            </div>
+                            <div class="form-group">
+                                <label>House Edge (%)</label>
+                                <input type="number" class="form-input" value="5" step="0.1" />
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="saveGameSettings()">
+                                Save Settings
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="control-card">
+                        <h3 class="card-title">💰 Wallet Settings</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Minimum Deposit ($)</label>
+                                <input type="number" class="form-input" value="10" />
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Withdrawal ($)</label>
+                                <input type="number" class="form-input" value="20" />
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Withdrawal ($)</label>
+                                <input type="number" class="form-input" value="5000" />
+                            </div>
+                            <div class="form-group">
+                                <label>USDT Wallet Address (TRC20)</label>
+                                <input type="text" class="form-input" value="" />
+                            </div>
+                            <button type="button" class="btn btn-primary full-width" onclick="saveWalletSettings()">
+                                Save Settings
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="control-card">
+                        <h3 class="card-title">🚪 Account Actions</h3>
+                        <div class="settings-form">
+                            <p style="color: #a0a0b0; font-size: 14px; margin-bottom: 20px;">
+                                Sign out of the admin panel. You will need to log in again to access the dashboard.
+                            </p>
+                            <button type="button" class="btn btn-danger full-width" onclick="adminLogout()">
+                                Logout from Admin Panel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Referral Control Section -->
+            <section id="referral-control" class="content-section">
+                <div class="section-header">
+                    <h3>👨‍👩‍👧‍👦 Referral Control & Fraud Detection</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="loadReferralList()">
+                            🔄 Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-tabs" style="margin-bottom: 20px">
+                    <button class="filter-tab active" onclick="filterReferralsByRisk('all')">
+                        All
+                    </button>
+                    <button class="filter-tab" onclick="filterReferralsByRisk('red')">
+                        🔴 High Risk
+                    </button>
+                    <button class="filter-tab" onclick="filterReferralsByRisk('yellow')">
+                        🟡 Medium Risk
+                    </button>
+                    <button class="filter-tab" onclick="filterReferralsByRisk('green')">
+                        🟢 Low Risk
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Inviter UID</th>
+                                <th>Risk Level</th>
+                                <th>Team Count</th>
+                                <th>Team Recharge</th>
+                                <th>Total Commission</th>
+                                <th>Same IP</th>
+                                <th>Same Device</th>
+                                <th>Active Flags</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="referralListTableBody">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Security / Flags Section -->
+            <section id="security-flags" class="content-section">
+                <div class="section-header">
+                    <h3>🛡️ Security & Fraud Detection</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="loadSecurityOverview()">
+                            🔄 Refresh
+                        </button>
+                        <button class="btn btn-secondary" onclick="showBatchAnalyzeModal()">
+                            🔍 Batch Analyze
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Security Stats Cards -->
+                <div class="summary-cards" style="margin-bottom: 20px">
+                    <div class="summary-card">
+                        <div class="card-icon users" style="background: #ef4444">
+                            🚩
+                        </div>
+                        <div class="card-info">
+                            <span class="card-value" id="criticalFlagsCount">0</span>
+                            <span class="card-label">Critical Flags</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon deposits" style="background: #f59e0b">
+                            ⚠️
+                        </div>
+                        <div class="card-info">
+                            <span class="card-value" id="highFlagsCount">0</span>
+                            <span class="card-label">High Priority</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="card-icon withdrawals" style="background: #3b82f6">
+                            👥
+                        </div>
+                        <div class="card-info">
+                            <span class="card-value" id="flaggedUsersCount">0</span>
+                            <span class="card-label">Flagged Users</span>
+                        </div>
+                    </div>
+                    <div class="summary-card profit">
+                        <div class="card-icon profit-icon" style="background: #10b981">
+                            ✅
+                        </div>
+                        <div class="card-info">
+                            <span class="card-value" id="resolvedFlagsCount">0</span>
+                            <span class="card-label">Resolved (7d)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-tabs" style="margin-bottom: 20px">
+                    <button class="filter-tab active" onclick="filterSecurityFlags('all')">
+                        All Flags
+                    </button>
+                    <button class="filter-tab" onclick="filterSecurityFlags('critical')">
+                        Critical
+                    </button>
+                    <button class="filter-tab" onclick="filterSecurityFlags('high')">
+                        High
+                    </button>
+                    <button class="filter-tab" onclick="filterSecurityFlags('same_ip')">
+                        Same IP
+                    </button>
+                    <button class="filter-tab" onclick="filterSecurityFlags('same_device')">
+                        Same Device
+                    </button>
+                    <button class="filter-tab" onclick="filterSecurityFlags('referral_abuse')">
+                        Referral Abuse
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Email</th>
+                                <th>Risk Score</th>
+                                <th>Risk Level</th>
+                                <th>Flag Count</th>
+                                <th>Flag Types</th>
+                                <th>Balance</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="securityFlagsTableBody">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- User Details Modal -->
+            <div id="userDetailsModal" class="modal" style="display: none;">
+                <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+                    <div class="modal-header"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3>User Details</h3>
+                        <button onclick="closeUserModal()"
+                            style="background: none; border: none; font-size: 24px; cursor: pointer; color: #9ca3af;">&times;</button>
+                    </div>
+
+                    <!-- User Info Section -->
+                    <div style="background: #1f2937; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Email</label>
+                                <div id="modalUserEmail" style="color: #fff; font-weight: 500;">-</div>
+                            </div>
+                            <div>
+                                <label style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">User
+                                    ID</label>
+                                <div id="modalUserId" style="color: #fff; font-size: 11px; font-family: monospace;">-
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Country</label>
+                                <div id="modalUserCountry" style="color: #fff; font-weight: 500;">-</div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Balance</label>
+                                <div id="modalUserBalance" style="color: #10b981; font-weight: 600; font-size: 18px;">
+                                    $0.00</div>
+                            </div>
+                            <div style="grid-column: span 2;">
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Status
+                                    & Actions</label>
+                                <div id="modalUserStatusContainer"
+                                    style="display: flex; align-items: center; gap: 15px; min-height: 36px;">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Registered</label>
+                                <div id="modalUserRegistered" style="color: #fff; font-weight: 500;">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Section -->
+                    <div style="background: #1f2937; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 15px; color: #fff;">Statistics</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Total
+                                    Deposits</label>
+                                <div id="modalTotalDeposits" style="color: #10b981; font-weight: 600;">$0.00</div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Total
+                                    Bets</label>
+                                <div id="modalTotalBets" style="color: #3b82f6; font-weight: 600;">$0.00</div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Total
+                                    Winnings</label>
+                                <div id="modalTotalWinnings" style="color: #fbbf24; font-weight: 600;">$0.00</div>
+                            </div>
+                            <div>
+                                <label
+                                    style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Total
+                                    Withdrawals</label>
+                                <div id="modalTotalWithdrawals" style="color: #ef4444; font-weight: 600;">$0.00</div>
+                            </div>
+                            <div>
+                                <label style="color: #9ca3af; font-size: 12px; display: block; margin-bottom: 5px;">Bet
+                                    Count</label>
+                                <div id="modalBetCount" style="color: #fff; font-weight: 600;">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="modal-actions" style="padding-top: 15px; margin-top: 20px;">
+                        <button class="btn btn-secondary" onclick="closeUserModal()" style="width: 100%;">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Funds Modal -->
+            <div id="addFundsModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3 id="addFundsModalTitle">Add Funds to User</h3>
+                    <form id="addFundsForm" onsubmit="event.preventDefault(); confirmAddFunds();">
+                        <div class="form-group">
+                            <label for="addFundsAmount">Amount ($)</label>
+                            <input type="number" id="addFundsAmount" class="form-input"
+                                placeholder="Enter amount to add" min="0.01" step="0.01" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="addFundsReason">Reason</label>
+                            <input type="text" id="addFundsReason" class="form-input"
+                                placeholder="Enter reason for adding funds" required />
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="closeAddFundsModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Event listener for red envelope eligibility dropdown
+        setTimeout(() => {
+            const eligibilityDropdown = document.getElementById('envelopeEligibility');
+            const targetUidGroup = document.getElementById('targetUidGroup');
+            const targetUidInput = document.getElementById('targetUid');
+
+            if (eligibilityDropdown && targetUidGroup) {
+                eligibilityDropdown.addEventListener('change', function () {
+                    if (this.value === 'specific_user') {
+                        targetUidGroup.style.display = 'block';
+                    } else {
+                        targetUidGroup.style.display = 'none';
+                        if (targetUidInput) {
+                            targetUidInput.value = '';
+                        }
+                    }
+                });
+            }
+        }, 500);
+    </script>
+</body>
+
+</html>

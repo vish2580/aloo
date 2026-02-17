@@ -1,5 +1,5 @@
 // ========== API CONFIGURATION ==========
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "/api";
 
 // Initialize AuthManager (production-grade authentication)
 let authManager = null;
